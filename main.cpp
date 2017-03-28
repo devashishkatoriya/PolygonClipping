@@ -1,3 +1,9 @@
+//Program to implement Sutherland-Hodgeman Polygon Clipping Algorithm
+
+/*
+ * Created be Devashish Katoriya on 28-03-2017
+ */
+
 #include <iostream>
 #include <graphics.h>
 
@@ -44,7 +50,7 @@ void leftClip(int x[],int y[],int *n)
         {
             //from outside to inside, store intersection and second vertex
             int X = xl;
-            int Y = y1 + (xl-x1)*((y2-y1)/(x2-x1));
+            int Y = y1 + (xl-x1)*float(((y1-y2)/(x1-x2)));
 
             tempX[j] = X;
             tempY[j] = Y;
@@ -59,7 +65,7 @@ void leftClip(int x[],int y[],int *n)
         {
             //inside to outside, store the intersection only
             int X = xl;
-            int Y = y1 + (xl-x1)*((y2-y1)/(x2-x1));
+            int Y = y1 + float((xl-x1)*((y2-y1)/(x2-x1)));
             tempX[j] = X;
             tempY[j] = Y;
             j++;
@@ -258,6 +264,9 @@ int main()
 
     do
     {
+        cleardevice();
+        setcolor(BLUE);
+        rectangle(xl,yl,xh,yh);
         ch = 'n';
         cout<<"\nEnter how many vertices ? ";
         cin>>n;
@@ -267,9 +276,6 @@ int main()
             cout<<"\n";
             cin>>x[i]>>y[i];
         }
-        cleardevice();
-        setcolor(BLUE);
-        rectangle(xl,yl,xh,yh);
         draw(x,y,n);
 
         leftClip(x,y,&n);
@@ -281,8 +287,12 @@ int main()
         draw(x,y,n);
         cout<<"\nDo you want to continue (y/n) ? ";
         cin>>ch;
-    }while(ch!='n');
+    }while(ch=='y'||ch=='Y');
     closegraph();
     cout<<"\nThank you for using this program :)";
     return 0;
 }
+
+// Window - 100 100 400 400
+// 4 - 50 150 150 125 150 325 50 350
+// 4 - 50 125 150 125 150 325 50 325
