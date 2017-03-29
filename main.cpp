@@ -28,7 +28,7 @@ void leftClip(int x[],int y[],int *n)
     int tempX[LIMIT],tempY[LIMIT],i,j,count,x1,x2,y1,y2;
     j = 0;
     count = 0;
-    for(i=0;i<(*n);i++)
+    for(i=0;i<(*n)-1;i++)
     {
         x1 = x[i];
         x2 = x[i+1];
@@ -122,7 +122,7 @@ void rightClip(int x[],int y[],int *n)
         {
             //inside to outside, store the intersection only
             int X = xh;
-            double Y = y1 + ((xh-x1)*(y2-y1))/(x2-x1);
+            double Y = y1 + (xh-x1)*(y2-y1)/(x2-x1);
             tempX[j] = X;
             tempY[j] = Y;
             j++;
@@ -298,3 +298,4 @@ int main()
 // 4 - 50 150 150 125 150 325 50 350
 // 4 - 50 125 150 125 150 325 50 325
 // 4 - 50 150 450 125 450 325 50 350
+// 3 - 50 150 150 300 50 300
