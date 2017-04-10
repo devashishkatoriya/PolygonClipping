@@ -50,7 +50,7 @@ void leftClip(int x[],int y[],int *n)
         {
             //from outside to inside, store intersection and second vertex
             int X = xl;
-            int Y = y1 + (xl-x1)*(y1-y2)/(x1-x2);
+            int Y = y1 + (((xl-x1)*(y1-y2))/(x1-x2));
 
             tempX[j] = X;
             tempY[j] = Y;
@@ -65,13 +65,56 @@ void leftClip(int x[],int y[],int *n)
         {
             //inside to outside, store the intersection only
             int X = xl;
-            double Y = y1 + ((xl-x1)*(y2-y1))/(x2-x1);
+            int Y = y1 + (((xl-x1)*(y2-y1))/(x2-x1));
             tempX[j] = X;
             tempY[j] = Y;
             j++;
             count++;
         }
     }
+
+    x1 = x[*n-1];
+    x2 = x[0];
+    y1 = y[*n-1];
+    y2 = y[0];
+    if(x1<xl && x2<xl)
+    {
+        //both pts are outside, so store none of them
+    }
+    else if(x1>xl && x2>xl)
+    {
+        //both pts are inside, store the second vertex
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else if(x1<xl && x2>xl)
+    {
+        //from outside to inside, store intersection and second vertex
+        int X = xl;
+        int Y = y1 + (((xl-x1)*(y1-y2))/(x1-x2));
+
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else
+    {
+        //inside to outside, store the intersection only
+        int X = xl;
+        int Y = y1 + (((xl-x1)*(y2-y1))/(x2-x1));
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+    }
+
     *n = count;
     for(i=0;i<*n;i++)
     {
@@ -107,7 +150,7 @@ void rightClip(int x[],int y[],int *n)
         {
             //from outside to inside, store intersection and second vertex
             int X = xh;
-            double Y = y1 + ((x1-xh)*(y2-y1))/(x2-x1);
+            int Y = y1 + (((xh-x1)*(y2-y1))/(x2-x1));
 
             tempX[j] = X;
             tempY[j] = Y;
@@ -122,13 +165,58 @@ void rightClip(int x[],int y[],int *n)
         {
             //inside to outside, store the intersection only
             int X = xh;
-            double Y = y1 + ((xh-x1)*(y2-y1))/(x2-x1);
+            int Y = y1 + (((xh-x1)*(y2-y1))/(x2-x1));
             tempX[j] = X;
             tempY[j] = Y;
             j++;
             count++;
         }
     }
+
+
+
+    x1 = x[*n-1];
+    x2 = x[0];
+    y1 = y[*n-1];
+    y2 = y[0];
+    if(x1>xh && x2>xh)
+    {
+        //both pts are outside, so store none of them
+    }
+    else if(x1<=xh && x2<=xh)
+    {
+        //both pts are inside, store the second vertex
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else if(x1>xh && x2<xh)
+    {
+        //from outside to inside, store intersection and second vertex
+        int X = xh;
+        int Y = y1 + (((xh-x1)*(y2-y1))/(x2-x1));
+
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else
+    {
+        //inside to outside, store the intersection only
+        int X = xh;
+        int Y = y1 + (((xh-x1)*(y2-y1))/(x2-x1));
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+    }
+
 
     *n = count;
     for(i=0;i<*n;i++)
@@ -164,7 +252,7 @@ void topClip(int x[],int y[],int *n)
         else if(y1<yl && y2>yl)
         {
             //from outside to inside, store intersection and second vertex
-            int X = x1 + ((yl-y1)*(x2-x1))/(y2-y1);
+            int X = x1 + (((yl-y1)*(x2-x1))/(y2-y1));
             int Y = yl;
 
             tempX[j] = X;
@@ -179,7 +267,7 @@ void topClip(int x[],int y[],int *n)
         else
         {
             //inside to outside, store the intersection only
-            int X = x1 + ((yl-y1)*(x2-x1))/(y2-y1);
+            int X = x1 + (((yl-y1)*(x2-x1))/(y2-y1));
             int Y = yl;
             tempX[j] = X;
             tempY[j] = Y;
@@ -187,6 +275,58 @@ void topClip(int x[],int y[],int *n)
             count++;
         }
     }
+
+
+
+
+    x1 = x[*n-1];
+    x2 = x[0];
+    y1 = y[*n-1];
+    y2 = y[0];
+    if(y1<yl && y2<yl)
+    {
+        //both pts are outside, so store none of them
+    }
+    else if(y1>yl && y2>yl)
+    {
+        //both pts are inside, store the second vertex
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else if(y1<yl && y2>yl)
+    {
+        //from outside to inside, store intersection and second vertex
+        int X = x1 + (((yl-y1)*(x2-x1))/(y2-y1));
+        int Y = yl;
+
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else
+    {
+        //inside to outside, store the intersection only
+        int X = x1 + (((yl-y1)*(x2-x1))/(y2-y1));
+        int Y = yl;
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+    }
+
+
+
+
+
+
+
     *n = count;
     for(i=0;i<*n;i++)
     {
@@ -221,7 +361,7 @@ void bottomClip(int x[],int y[],int *n)
         else if(y1>yh && y2<yh)
         {
             //from outside to inside, store intersection and second vertex
-            int X = x1 + ((y1-yh)*(x2-x1))/(y2-y1);
+            int X = x1 + ((yh-y1)*(x2-x1))/(y2-y1);
             int Y = yh;
 
             tempX[j] = X;
@@ -236,7 +376,7 @@ void bottomClip(int x[],int y[],int *n)
         else
         {
             //inside to outside, store the intersection only
-            int X = x1 + ((y1-yh)*(x2-x1))/(y2-y1);
+            int X = x1 + ((yh-y1)*(x2-x1))/(y2-y1);
             int Y = yh;
             tempX[j] = X;
             tempY[j] = Y;
@@ -244,6 +384,54 @@ void bottomClip(int x[],int y[],int *n)
             count++;
         }
     }
+
+
+    x1 = x[*n-1];
+    x2 = x[0];
+    y1 = y[*n-1];
+    y2 = y[0];
+    if(y1>yh && y2>yh)
+    {
+        //both pts are outside, so store none of them
+    }
+    else if(y1<yh && y2<yh)
+    {
+        //both pts are inside, store the second vertex
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else if(y1>yh && y2<yh)
+    {
+        //from outside to inside, store intersection and second vertex
+        int X = x1 + ((yh-y1)*(x2-x1))/(y2-y1);
+        int Y = yh;
+
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+        tempX[j] = x2;
+        tempY[j] = y2;
+        j++;
+        count++;
+    }
+    else
+    {
+        //inside to outside, store the intersection only
+        int X = x1 + ((yh-y1)*(x2-x1))/(y2-y1);
+        int Y = yh;
+        tempX[j] = X;
+        tempY[j] = Y;
+        j++;
+        count++;
+    }
+
+
+
+
+
     *n = count;
     for(i=0;i<*n;i++)
     {
@@ -281,8 +469,8 @@ int main()
 
         leftClip(x,y,&n);
         rightClip(x,y,&n);
-        //bottomClip(x,y,&n);
-        //topClip(x,y,&n);
+        topClip(x,y,&n);
+        bottomClip(x,y,&n);
 
         setcolor(WHITE);
         draw(x,y,n);
@@ -295,6 +483,12 @@ int main()
 }
 
 // Window - 100 100 400 400
-// 4 - 50 150 150 125 150 325 50 350
-// 4 - 50 125 150 125 150 325 50 325
-// 4 - 50 150 450 125 450 325 50 350
+// 4 - 50 150 150 125 150 325 50 350    //left
+// 4 - 50 125 150 125 150 325 50 325    //left
+// 4 - 50 150 450 125 450 325 50 350    //left-right
+
+// 4 - 50 50 150 25 150 325 50 350      //left-top
+// 4 - 50 150 150 125 150 425 50 450    //left-bottom
+// 4 - 50 50 150 25 150 425 50 450      //left-bottom-top
+// 4 - 50 150 450 125 450 425 50 450    //left-right-bottom
+// 4 - 50 50 450 25 450 325 50 350      //left-right-top
