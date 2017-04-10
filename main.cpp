@@ -73,6 +73,7 @@ void leftClip(int x[],int y[],int *n)
         }
     }
 
+    //closing line
     x1 = x[*n-1];
     x2 = x[0];
     y1 = y[*n-1];
@@ -173,8 +174,7 @@ void rightClip(int x[],int y[],int *n)
         }
     }
 
-
-
+    //closing line
     x1 = x[*n-1];
     x2 = x[0];
     y1 = y[*n-1];
@@ -216,7 +216,6 @@ void rightClip(int x[],int y[],int *n)
         j++;
         count++;
     }
-
 
     *n = count;
     for(i=0;i<*n;i++)
@@ -276,9 +275,7 @@ void topClip(int x[],int y[],int *n)
         }
     }
 
-
-
-
+    //closing line
     x1 = x[*n-1];
     x2 = x[0];
     y1 = y[*n-1];
@@ -320,12 +317,6 @@ void topClip(int x[],int y[],int *n)
         j++;
         count++;
     }
-
-
-
-
-
-
 
     *n = count;
     for(i=0;i<*n;i++)
@@ -385,7 +376,7 @@ void bottomClip(int x[],int y[],int *n)
         }
     }
 
-
+    //closing line
     x1 = x[*n-1];
     x2 = x[0];
     y1 = y[*n-1];
@@ -428,10 +419,6 @@ void bottomClip(int x[],int y[],int *n)
         count++;
     }
 
-
-
-
-
     *n = count;
     for(i=0;i<*n;i++)
     {
@@ -467,6 +454,7 @@ int main()
         }
         draw(x,y,n);
 
+        //left-right-top-bottom
         leftClip(x,y,&n);
         rightClip(x,y,&n);
         topClip(x,y,&n);
